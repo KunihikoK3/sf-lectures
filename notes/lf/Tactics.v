@@ -1,5 +1,5 @@
 (** * Tactics: More Basic Tactics *)
-
+From Hammer Require Import Tactics.
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From LF Require Export Poly.
 
@@ -12,15 +12,7 @@ From LF Require Export Poly.
 Theorem silly1 : forall (n m : nat),
   n = m ->
   n = m.
-Proof.
-  intros n m eq.
-
-(** Here, we could finish with "[rewrite -> eq.  reflexivity.]" as we
-    have done several times before.  Alternatively, we can finish in
-    a single step by using the [apply] tactic: *)
-
-  apply eq.  Qed.
-
+Proof. sauto. Qed.
 (** [apply] also works with _conditional_ hypotheses: *)
 
 Theorem silly2 : forall (n m o p : nat),
@@ -28,8 +20,7 @@ Theorem silly2 : forall (n m o p : nat),
   (n = m -> [n;o] = [m;p]) ->
   [n;o] = [m;p].
 Proof.
-  intros n m o p eq1 eq2.
-  apply eq2. apply eq1.  Qed.
+  sauto.
 
 (** Observe how Coq picks appropriate values for the
     [forall]-quantified variables of the hypothesis: *)
